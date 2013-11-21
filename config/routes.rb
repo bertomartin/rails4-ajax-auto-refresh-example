@@ -1,5 +1,9 @@
 AjaxApp::Application.routes.draw do
+
+  get 'people/populate' => 'people#populate', as: :populate_people
+  get 'people/refresh' => 'people#refresh', as: :refresh_people
   resources :people
+  root 'people#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

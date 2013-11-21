@@ -10,18 +10,12 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @people.each do |person| %>
-      <tr>
-        <td><%= person.name %></td>
-        <td><%= link_to 'Show', person %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+  <tbody id="peopletbody">
+    <%= render 'people_table', :people => @people %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Person', new_person_path %>
+<a href="#" id="refresh">Refresh With Ajax</a>
+<!-- this is a ajax remote rails link -->
+<%= link_to "Populate More People with Ajax", populate_people_path, remote: true %>

@@ -1,6 +1,20 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
+  def populate
+    # random 10 new people on db
+    alpha = ("a".."z").to_a
+    10.times do
+      Person.create(name: alpha.sample(5).join(''))
+    end
+    render :nothing => true
+  end
+
+  def refresh
+    # render the partial for people table back to the ajax request
+    # which will be the contents of data and be inserted into the tbody
+    render :partial => 'people/people_table', :format => 'text/html', :locals => {:people => Person.all}
+  end
   # GET /people
   # GET /people.json
   def index
